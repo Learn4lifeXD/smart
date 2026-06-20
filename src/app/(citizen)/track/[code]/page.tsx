@@ -5,11 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
-export default function CitizenTrackPage({ params }: { params: { code: string } }) {
+export default function CitizenTrackPage() {
   const router = useRouter()
-  const [code, setCode] = useState(params.code || '')
+  const params = useParams()
+  const urlCode = params?.code as string | undefined
+  const [code, setCode] = useState(urlCode || '')
   
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4 font-sans">
@@ -18,7 +20,7 @@ export default function CitizenTrackPage({ params }: { params: { code: string } 
           <CardTitle className="text-center text-2xl font-heading font-bold text-primary">Track Dossier</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {!params.code && (
+          {!urlCode && (
             <div className="space-y-6">
               <p className="text-sm text-muted-foreground text-center">Enter your tracking code to view the status of your procedure.</p>
               <div className="space-y-2">
@@ -29,11 +31,11 @@ export default function CitizenTrackPage({ params }: { params: { code: string } 
             </div>
           )}
           
-          {params.code && (
+          {urlCode && (
             <div className="space-y-6">
               <div className="text-center">
                 <p className="text-sm text-muted-foreground font-semibold uppercase tracking-wider">Status for dossier:</p>
-                <h2 className="text-3xl font-mono text-primary font-bold tracking-wider mt-1">{params.code}</h2>
+                <h2 className="text-3xl font-mono text-primary font-bold tracking-wider mt-1">{urlCode}</h2>
               </div>
               
               <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
