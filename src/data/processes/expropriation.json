@@ -1,0 +1,13 @@
+{
+  "process_type": "expropriation",
+  "name": "Property Expropriation",
+  "phases": [
+    { "index": 1, "id": "application_received", "name": "Application Received" },
+    { "index": 2, "id": "technical_evaluation", "name": "Technical Evaluation" },
+    { "index": 3, "id": "commission_review", "name": "Commission Review" },
+    { "index": 4, "id": "owner_notification", "name": "Owner Notification" },
+    { "index": 5, "id": "compensation_negotiation", "name": "Compensation Negotiation" },
+    { "index": 6, "id": "final_decision", "name": "Final Decision" },
+    { "index": 7, "id": "execution", "name": "Execution" }
+  ]
+}

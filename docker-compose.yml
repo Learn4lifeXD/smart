@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  paddle-ocr:
+    build: ./paddle-ocr-service
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./paddle-ocr-service:/app
