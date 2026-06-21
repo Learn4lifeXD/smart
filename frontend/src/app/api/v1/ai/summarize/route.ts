@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
-
 export async function POST(req: NextRequest) {
   try {
     const { document_text } = await req.json();
@@ -10,6 +8,13 @@ export async function POST(req: NextRequest) {
     if (!document_text) {
       return NextResponse.json({ error: "Missing document_text" }, { status: 400 });
     }
+
+    const apiKey = process.env.GOOGLE_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: "GOOGLE_API_KEY is completely missing from the environment. Please ensure you restarted the Next.js dev server." }, { status: 500 });
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
