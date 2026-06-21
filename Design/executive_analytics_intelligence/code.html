@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics Intelligence | Expropriation Authority</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#a3f4c1",
+                        "inverse-on-surface": "#313030",
+                        "primary-fixed-dim": "#88d7a6",
+                        "surface": "#131313",
+                        "surface-container": "#201f1f",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-secondary": "#3c2f00",
+                        "on-primary-fixed-variant": "#005230",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-tint": "#88d7a6",
+                        "primary-container": "#006039",
+                        "on-primary-fixed": "#002110",
+                        "surface-container-highest": "#353534",
+                        "error": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-error": "#690005",
+                        "primary": "#88d7a6",
+                        "on-primary": "#003920",
+                        "on-tertiary": "#313030",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-container": "#545353",
+                        "secondary-container": "#af8d11",
+                        "inverse-primary": "#176c43",
+                        "secondary-fixed": "#ffe088",
+                        "secondary": "#e9c349",
+                        "outline": "#89938a",
+                        "tertiary": "#c8c6c5",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-primary-container": "#88d8a7",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "background": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-container": "#c9c7c6",
+                        "on-secondary-container": "#342800",
+                        "on-surface-variant": "#bfc9bf",
+                        "surface-dim": "#131313",
+                        "surface-variant": "#353534",
+                        "outline-variant": "#3f4942"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-padding": "40px",
+                        "base": "8px",
+                        "stack-md": "12px",
+                        "gutter": "24px",
+                        "stack-sm": "4px",
+                        "section-gap": "64px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F0F0F;
+            color: #e5e2e1;
+        }
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(233, 195, 73, 0.3);
+            box-shadow: 0 0 5px rgba(233, 195, 73, 0.02);
+        }
+        .gold-glow {
+            text-shadow: 0 0 10px rgba(233, 195, 73, 0.5);
+        }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(136, 215, 166, 0.2) 0%, rgba(19, 19, 19, 0) 100%);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-x-hidden min-h-screen">
+<!-- Ambient Background Texture -->
+<div class="fixed inset-0 z-[-1] opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 50% 0%, #176c43 0%, transparent 50%);"></div>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-72 fixed left-0 top-0 bg-surface-container-low/80 backdrop-blur-xl border-r-[0.5px] border-secondary/30 bg-surface-container-lowest/90 shadow-[20px_0_40px_rgba(0,0,0,0.4)] z-50">
+<div class="py-container-padding flex flex-col h-full">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-full object-cover border border-secondary/50" data-alt="A highly detailed portrait of a senior government official or corporate executive in a sharp suit. The lighting is dramatic and cinematic, emphasizing authority. High-end, corporate photography style. Deep obsidian background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyHtCPqHA3qfiq0Sfvw1Y0cz1DVXSUrn59W63XpEZrVhj7vbJXtylfaKQtrpS5Ow2eCTetYcsxjxxXOIlm9C3eeQ-YJl1bVj5ZHY5iOYUgLdLUrra-ItvXo_xI_nrLZJGmaS8URKWUdCKMLv_dhv5A7GIA0YHYDX8Fs0Betpol6hvDwz5JYFbbF2zNURUz9PS_qg6tChByL41M8RKObNxalPe4mLEHStgZuecCRQFlG6Y3kXxxmzlqqX-TdTUAN5pkyBEafb_yO1c"/>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-secondary">Expropriation Authority</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Executive Suite</p>
+</div>
+</div>
+</div>
+<div class="flex-grow flex flex-col gap-2">
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+<span class="font-label-md text-label-md">Dossiers</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Topography</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span class="font-label-md text-label-md">Legal</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-primary bg-primary-container/20 border-l-2 border-secondary scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</div>
+<div class="px-6 mb-6">
+<button class="w-full py-3 bg-primary-container text-on-primary-container font-label-md text-label-md rounded border-t border-secondary hover:bg-primary-container/80 transition-colors">
+                    New Dossier
+                </button>
+</div>
+<div class="flex flex-col gap-2 border-t border-outline-variant/30 pt-4">
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-72 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-20 px-gutter bg-background/60 backdrop-blur-lg border-b-[0.5px] border-outline-variant/30 sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<h1 class="font-display-lg text-display-lg tracking-tight text-on-surface">Dossier Intelligence</h1>
+<nav class="hidden lg:flex gap-6">
+<a class="font-label-sm text-label-sm text-tertiary hover:text-primary transition-colors glow-effect" href="#">Directives</a>
+<a class="font-label-sm text-label-sm text-tertiary hover:text-primary transition-colors glow-effect" href="#">Compliance</a>
+<a class="font-label-sm text-label-sm text-tertiary hover:text-primary transition-colors glow-effect" href="#">Transfers</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary transition-colors glow-effect" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary transition-colors glow-effect" data-icon="history_edu">history_edu</span>
+</div>
+<button class="px-4 py-2 bg-transparent border border-secondary text-secondary font-label-md text-label-md hover:bg-secondary/10 transition-colors">
+                    Execute Order
+                </button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-gutter flex-grow">
+<div class="max-w-[1440px] mx-auto">
+<!-- Page Header -->
+<div class="mb-section-gap">
+<h2 class="font-display-lg text-display-lg text-on-surface mb-2">Analytics Intelligence</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">High-level quantitative overview of expropriation values, timeline efficiencies, and asset distribution across active dossiers.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- KPI Cards -->
+<div class="col-span-1 flex flex-col gap-gutter">
+<div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="relative z-10">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Total Expropriation Value</h3>
+<div class="font-display-lg text-display-lg text-secondary gold-glow">$4.2B</div>
+<div class="font-label-md text-label-md text-primary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                    +12.4% vs Q3
+                                </div>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="relative z-10">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Active Dossiers</h3>
+<div class="font-display-lg text-display-lg text-on-surface">1,492</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-2 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_5px_#e9c349]"></span>
+                                    Pending Review (340)
+                                </div>
+</div>
+</div>
+</div>
+<!-- Main Chart: Value Trends -->
+<div class="col-span-1 md:col-span-2 glass-panel p-6 rounded-lg flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Expropriation Value Trends</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Trailing 12 Months Valuation Trajectory</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-label-sm font-label-sm border border-outline-variant text-on-surface-variant hover:text-on-surface rounded">1M</button>
+<button class="px-3 py-1 text-label-sm font-label-sm border border-secondary text-secondary bg-secondary/10 rounded">1Y</button>
+<button class="px-3 py-1 text-label-sm font-label-sm border border-outline-variant text-on-surface-variant hover:text-on-surface rounded">ALL</button>
+</div>
+</div>
+<!-- Pseudo Chart Area -->
+<div class="flex-grow relative min-h-[250px] flex items-end justify-between px-4 chart-gradient border-b border-l border-outline-variant/30 pb-2">
+<!-- Y-axis labels -->
+<div class="absolute left-[-40px] top-0 bottom-0 flex flex-col justify-between text-[10px] text-on-surface-variant py-2">
+<span>$5B</span>
+<span>$2.5B</span>
+<span>$0</span>
+</div>
+<!-- Bars/Lines visualization -->
+<div class="w-8 h-[30%] bg-primary-container/50 border-t border-primary relative group">
+<div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-secondary rounded-full hidden group-hover:block gold-glow"></div>
+</div>
+<div class="w-8 h-[45%] bg-primary-container/50 border-t border-primary relative group">
+<div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-secondary rounded-full hidden group-hover:block gold-glow"></div>
+</div>
+<div class="w-8 h-[40%] bg-primary-container/50 border-t border-primary relative group">
+<div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-secondary rounded-full hidden group-hover:block gold-glow"></div>
+</div>
+<div class="w-8 h-[60%] bg-primary-container/50 border-t border-primary relative group">
+<div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-secondary rounded-full hidden group-hover:block gold-glow"></div>
+</div>
+<div class="w-8 h-[55%] bg-primary-container/50 border-t border-primary relative group">
+<div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-secondary rounded-full hidden group-hover:block gold-glow"></div>
+</div>
+<div class="w-8 h-[80%] bg-primary-container/50 border-t border-primary relative group">
+<div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-secondary rounded-full hidden group-hover:block gold-glow"></div>
+</div>
+<div class="w-8 h-[95%] bg-primary-container/80 border-t-2 border-secondary relative group">
+<div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-secondary rounded-full shadow-[0_0_8px_#e9c349]"></div>
+</div>
+<!-- X-axis labels -->
+<div class="absolute -bottom-6 left-0 right-0 flex justify-between px-4 text-[10px] text-on-surface-variant">
+<span>Jan</span>
+<span>Mar</span>
+<span>May</span>
+<span>Jul</span>
+<span>Sep</span>
+<span>Nov</span>
+<span>Dec</span>
+</div>
+</div>
+</div>
+<!-- Timeline Efficiency -->
+<div class="col-span-1 md:col-span-2 glass-panel p-6 rounded-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Succession Timeline Efficiency</h3>
+<div class="space-y-6">
+<!-- Progress Bar 1 -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-2">
+<span class="text-on-surface">Initial Assessment Phase</span>
+<span class="text-primary">Avg. 14 Days</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded overflow-hidden">
+<div class="h-full bg-primary w-[85%] relative">
+<div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-3 bg-secondary"></div>
+</div>
+</div>
+</div>
+<!-- Progress Bar 2 -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-2">
+<span class="text-on-surface">Valuation &amp; Audit</span>
+<span class="text-secondary">Avg. 45 Days</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded overflow-hidden">
+<div class="h-full bg-secondary w-[60%] relative">
+<div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-3 bg-primary"></div>
+</div>
+</div>
+</div>
+<!-- Progress Bar 3 -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-2">
+<span class="text-on-surface">Final Expropriation Decree</span>
+<span class="text-on-surface-variant">Avg. 21 Days</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded overflow-hidden">
+<div class="h-full bg-surface-variant w-[30%] border border-outline-variant"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Asset Distribution Donut -->
+<div class="col-span-1 glass-panel p-6 rounded-lg flex flex-col items-center justify-center">
+<h3 class="font-headline-md text-headline-md text-on-surface w-full text-left mb-6">Asset Distribution</h3>
+<!-- CSS Donut Chart representation -->
+<div class="relative w-48 h-48 rounded-full flex items-center justify-center mb-6" style="background: conic-gradient(#88d7a6 0% 45%, #e9c349 45% 75%, #353534 75% 100%);">
+<div class="w-36 h-36 bg-[#1a1a1a] rounded-full absolute flex flex-col items-center justify-center">
+<span class="font-display-lg text-display-lg text-on-surface">100<span class="text-[20px]">%</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Allocated</span>
+</div>
+</div>
+<div class="w-full space-y-3">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded bg-primary"></div>
+<span class="text-on-surface">Commercial Real Estate</span>
+</div>
+<span class="text-on-surface-variant">45%</span>
+</div>
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded bg-secondary"></div>
+<span class="text-on-surface">Industrial Land</span>
+</div>
+<span class="text-on-surface-variant">30%</span>
+</div>
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded bg-surface-variant border border-outline-variant"></div>
+<span class="text-on-surface">Agricultural</span>
+</div>
+<span class="text-on-surface-variant">25%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

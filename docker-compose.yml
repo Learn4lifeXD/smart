@@ -1,0 +1,101 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------
+  # API Gateway
+  # ----------------------------------------
+  traefik:
+    image: traefik:v3.0
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - smart_dossier_net
+
+  # ----------------------------------------
+  # Primary Database
+  # ----------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: smart_dossier
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - smart_dossier_net
+
+  # ----------------------------------------
+  # Cache
+  # ----------------------------------------
+  valkey:
+    image: valkey/valkey:7
+    ports:
+      - "6379:6379"
+    networks:
+      - smart_dossier_net
+
+  # ----------------------------------------
+  # Identity & Auth
+  # ----------------------------------------
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    command: start-dev
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/smart_dossier
+      KC_DB_USERNAME: admin
+      KC_DB_PASSWORD: secretpassword
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+    networks:
+      - smart_dossier_net
+
+  # ----------------------------------------
+  # Custom Backend Services
+  # ----------------------------------------
+  dossier-service:
+    build: ./backend/dossier-service
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+    networks:
+      - smart_dossier_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dossier.rule=PathPrefix(`/api/v1/dossiers`)"
+      - "traefik.http.services.dossier.loadbalancer.server.port=8001"
+
+  ai-orchestrator:
+    build: ./backend/ai-orchestrator
+    ports:
+      - "8004:8004"
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    networks:
+      - smart_dossier_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ai.rule=PathPrefix(`/api/v1/ai`)"
+      - "traefik.http.services.ai.loadbalancer.server.port=8004"
+
+volumes:
+  pg_data:
+
+networks:
+  smart_dossier_net:
+    driver: bridge

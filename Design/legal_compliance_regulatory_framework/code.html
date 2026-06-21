@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Legal &amp; Compliance - Dossier Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#a3f4c1",
+                        "inverse-on-surface": "#313030",
+                        "primary-fixed-dim": "#88d7a6",
+                        "surface": "#131313",
+                        "surface-container": "#201f1f",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-secondary": "#3c2f00",
+                        "on-primary-fixed-variant": "#005230",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-tint": "#88d7a6",
+                        "primary-container": "#006039",
+                        "on-primary-fixed": "#002110",
+                        "surface-container-highest": "#353534",
+                        "error": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-error": "#690005",
+                        "primary": "#88d7a6",
+                        "on-primary": "#003920",
+                        "on-tertiary": "#313030",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-container": "#545353",
+                        "secondary-container": "#af8d11",
+                        "inverse-primary": "#176c43",
+                        "secondary-fixed": "#ffe088",
+                        "secondary": "#e9c349",
+                        "outline": "#89938a",
+                        "tertiary": "#c8c6c5",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-primary-container": "#88d8a7",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "background": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-container": "#c9c7c6",
+                        "on-secondary-container": "#342800",
+                        "on-surface-variant": "#bfc9bf",
+                        "surface-dim": "#131313",
+                        "surface-variant": "#353534",
+                        "outline-variant": "#3f4942"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-padding": "40px",
+                        "base": "8px",
+                        "stack-md": "12px",
+                        "gutter": "24px",
+                        "stack-sm": "4px",
+                        "section-gap": "64px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .glass-panel-active {
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(233, 195, 73, 0.3);
+            box-shadow: 0 0 5px rgba(233, 195, 73, 0.02);
+        }
+        .atmospheric-shadow {
+            box-shadow: 0 20px 40px rgba(0, 57, 32, 0.05); /* Faint Forest Green tint */
+        }
+        .champagne-gradient {
+            background: linear-gradient(90deg, rgba(233, 195, 73, 0.8) 0%, rgba(233, 195, 73, 0) 100%);
+            height: 1px;
+            width: 100%;
+        }
+        .list-row-hover:hover {
+            background-color: rgba(58, 57, 57, 0.5); /* surface-bright/50 */
+            backdrop-filter: blur(24px);
+            border-left: 2px solid #88d7a6; /* primary */
+        }
+        
+        /* Custom scrollbar for inner panes */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353534;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #545353;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="h-screen w-72 fixed left-0 top-0 bg-surface-container-low/80 backdrop-blur-xl border-r-[0.5px] border-secondary/30 shadow-[20px_0_40px_rgba(0,0,0,0.4)] z-50 flex flex-col py-container-padding hidden md:flex">
+<!-- Brand/Header -->
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-secondary/30">
+<img alt="Senior Official Profile" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, dark obsidian lapel pin with a faint gold insignia, symbolizing authority and discretion in a high-end corporate setting, dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB96sfTONsae23j0P2dxmKMgiWWdcnhNuyEKcyXHAAoYtiW6XD7zi9iOvTMo0f3UJhVK8FRjuzyhGs9u4gAgXs9K07tvu7i4zSPrD21rYsZVMMhzHmlQDMbukMA1-dK6OCY718SEfi0Gt6ZvK7zic8ESA4MJXSbg3WIcVyrlG1wURjCFXmdjLTerks5krXc5WKdSIP6NwZQbZxkAX4yfcgqqilDlD8P_GPFXlFUiD45AS-mniTiSKKfPSkDqHwngF26ugFfieGUb4g"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-secondary">Expropriation Authority</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Executive Suite</p>
+</div>
+</div>
+<button class="w-full py-3 px-4 bg-primary-container text-on-primary-container font-label-md text-label-md rounded border-t border-secondary/50 hover:bg-primary-container/80 transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Dossier
+            </button>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-1 mt-4">
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">folder_managed</span>
+<span class="font-label-md text-label-md">Dossiers</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md">Topography</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-4 px-6 py-4 text-primary bg-primary-container/20 border-l-2 border-secondary scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span class="font-label-md text-label-md">Legal</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</div>
+<!-- Footer Links -->
+<div class="mt-auto flex flex-col gap-1 border-t border-outline-variant/30 pt-4">
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-72 w-full">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-20 px-gutter bg-background/60 backdrop-blur-lg border-b-[0.5px] border-outline-variant/30 docked full-width top-0 z-40 relative">
+<div class="flex items-center gap-6">
+<span class="font-display-lg text-display-lg tracking-tight text-on-surface hidden lg:block">Dossier Intelligence</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile tracking-tight text-on-surface lg:hidden">Dossier Intel</span>
+<nav class="hidden lg:flex items-center gap-6 ml-8">
+<a class="font-label-sm text-label-sm text-tertiary hover:text-primary transition-colors" href="#">Directives</a>
+<a class="font-label-sm text-label-sm text-secondary border-b border-secondary pb-1 glow-effect transition-all" href="#">Compliance</a>
+<a class="font-label-sm text-label-sm text-tertiary hover:text-primary transition-colors" href="#">Transfers</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors">notifications</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors">history_edu</span>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label-md text-label-md px-4 py-2 rounded border-t border-secondary/50 hover:bg-primary-container/80 transition-colors">
+                    Execute Order
+                </button>
+</div>
+</header>
+<!-- Canvas / Dual Pane Content -->
+<main class="flex-1 overflow-hidden p-gutter flex flex-col lg:flex-row gap-gutter">
+<!-- Left Pane: Regulatory Framework -->
+<section class="flex-1 glass-panel rounded-xl border border-outline-variant/30 flex flex-col overflow-hidden atmospheric-shadow relative">
+<!-- 3D Abstract Background Hint -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" data-alt="Abstract 3D topographical mesh rendering in deep obsidian with faint champagne gold refractions, high-end dark mode, conveying legal and land structures subtly." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAg3VDnOArjQ5oDFH4AUaC_O0HLHZJpzUZZFAQmhz9xxb-dubf1fHCXGPviKYGFhLj_EHs-5UEgmXkyZ7sxVQ8PeUW-Cv1KtoRmugogZP076xfGxUEBxf2MJnr5wPLkpK5Ehew0UdQ0GHPXJ-yLl06MlqRA1r9R6BJTLNl18b-lQkQTgSvDMuboW8mkrss0p1acY66_r_HCBLBhnsW733Oe3v_ulk2mIf8zIRdXDXo6CErKIsyRRlV5iBllVGK8dqaQIQjP89-BksA'); background-size: cover; background-position: center;"></div>
+<header class="p-6 relative z-10 border-b border-outline-variant/30 bg-surface-container-low/50">
+<h2 class="font-headline-md text-headline-md text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined">menu_book</span>
+                        Regulatory Framework
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Verified local statutes and zoning ordinances.</p>
+<div class="champagne-gradient mt-6"></div>
+</header>
+<div class="flex-1 overflow-y-auto p-4 relative z-10">
+<div class="flex flex-col gap-2">
+<!-- Item 1: Verified -->
+<div class="p-4 rounded-lg list-row-hover cursor-pointer border border-transparent transition-all group flex items-start gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Statute 402.B: Eminent Domain Criteria</h3>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-surface-container rounded text-secondary border border-secondary/20">Verified</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">Mandates a minimum 90-day notice period and independent appraisal prior to issuing initial tender offers for commercial properties.</p>
+<div class="mt-2 flex gap-2">
+<span class="text-xs text-outline font-label-sm">Ref: ED-2023-V1</span>
+<span class="text-xs text-outline font-label-sm border-l border-outline-variant pl-2">Federal</span>
+</div>
+</div>
+</div>
+<!-- Item 2: Warning -->
+<div class="p-4 rounded-lg list-row-hover cursor-pointer border border-transparent transition-all group flex items-start gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-outline">gavel</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<h3 class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Zoning Ord. 11-A: Historic Preservation</h3>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-error-container/20 rounded text-error border border-error/20">Review Required</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">Prohibits alteration of facade structures predating 1950 without explicit clearance from the Heritage Council.</p>
+<div class="mt-2 flex gap-2">
+<span class="text-xs text-outline font-label-sm">Ref: ZO-11A-Rev3</span>
+<span class="text-xs text-outline font-label-sm border-l border-outline-variant pl-2">Municipal</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Pane: Compliance Audit -->
+<section class="flex-1 glass-panel-active rounded-xl flex flex-col overflow-hidden atmospheric-shadow relative">
+<header class="p-6 relative z-10 bg-surface-container-lowest/80 border-b border-secondary/20">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">fact_check</span>
+                                Compliance Audit
+                            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Real-time verification log for Dossier #882-Delta.</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant/50">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(136,215,166,0.8)] animate-pulse"></div>
+<span class="font-label-sm text-label-sm text-on-surface">AI Active</span>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 bg-surface-container-low/30">
+<div class="space-y-6">
+<!-- Log Entry 1 -->
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-primary-container/30 border border-primary flex items-center justify-center mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary">check</span>
+</div>
+<div class="w-[1px] h-full bg-outline-variant/50 mt-2"></div>
+</div>
+<div class="flex-1 pb-4">
+<div class="flex justify-between items-baseline mb-2">
+<h4 class="font-label-md text-label-md text-on-surface">Notice Period Verification</h4>
+<span class="font-label-sm text-label-sm text-outline">10:42 AM</span>
+</div>
+<div class="bg-surface-container-high/50 p-3 rounded border border-outline-variant/30">
+<p class="font-body-md text-body-md text-sm text-on-surface-variant">System confirms draft tender notice implies 94-day window, satisfying <span class="text-secondary cursor-pointer hover:underline">Statute 402.B</span> requirements.</p>
+</div>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-secondary-container/30 border border-secondary flex items-center justify-center mt-1">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_5px_rgba(233,195,73,0.5)]"></div>
+</div>
+<div class="w-[1px] h-full bg-outline-variant/50 mt-2"></div>
+</div>
+<div class="flex-1 pb-4">
+<div class="flex justify-between items-baseline mb-2">
+<h4 class="font-label-md text-label-md text-on-surface">Appraisal Authenticity Check</h4>
+<span class="font-label-sm text-label-sm text-outline">10:45 AM</span>
+</div>
+<div class="bg-surface-container-high/50 p-3 rounded border border-outline-variant/30">
+<p class="font-body-md text-body-md text-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary animate-spin">sync</span>
+                                        Cross-referencing signature hashes with National Assessor Registry...
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

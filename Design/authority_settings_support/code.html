@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dossier Intelligence - Administrative Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed": "#a3f4c1",
+                        "inverse-on-surface": "#313030",
+                        "primary-fixed-dim": "#88d7a6",
+                        "surface": "#131313",
+                        "surface-container": "#201f1f",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-secondary": "#3c2f00",
+                        "on-primary-fixed-variant": "#005230",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-tint": "#88d7a6",
+                        "primary-container": "#006039",
+                        "on-primary-fixed": "#002110",
+                        "surface-container-highest": "#353534",
+                        "error": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-error": "#690005",
+                        "primary": "#88d7a6",
+                        "on-primary": "#003920",
+                        "on-tertiary": "#313030",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-container": "#545353",
+                        "secondary-container": "#af8d11",
+                        "inverse-primary": "#176c43",
+                        "secondary-fixed": "#ffe088",
+                        "secondary": "#e9c349",
+                        "outline": "#89938a",
+                        "tertiary": "#c8c6c5",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-primary-container": "#88d8a7",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "background": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-container": "#c9c7c6",
+                        "on-secondary-container": "#342800",
+                        "on-surface-variant": "#bfc9bf",
+                        "surface-dim": "#131313",
+                        "surface-variant": "#353534",
+                        "outline-variant": "#3f4942"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "container-padding": "40px",
+                        "base": "8px",
+                        "stack-md": "12px",
+                        "gutter": "24px",
+                        "stack-sm": "4px",
+                        "section-gap": "64px",
+                        "stack-lg": "24px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(233, 195, 73, 0.1);
+        }
+        .active-tab-glow {
+            border-bottom: 2px solid #e9c349;
+            box-shadow: 0 4px 15px -3px rgba(233, 195, 73, 0.15);
+        }
+        .gold-gradient-line {
+            background: linear-gradient(90deg, rgba(233, 195, 73, 0.5) 0%, rgba(233, 195, 73, 0) 100%);
+            height: 1px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col md:flex-row overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Ambient Background Effect -->
+<div class="fixed inset-0 pointer-events-none z-0 opacity-20" style="background: radial-gradient(circle at 50% 0%, rgba(0, 96, 57, 0.15), transparent 60%);"></div>
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col h-screen w-72 fixed left-0 top-0 bg-surface-container-low/80 backdrop-blur-xl border-r-[0.5px] border-secondary/30 shadow-[20px_0_40px_rgba(0,0,0,0.4)] z-40 py-container-padding">
+<!-- Brand Header -->
+<div class="px-6 mb-12">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant relative">
+<img alt="Senior Official Profile" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, dark obsidian geometric logo with subtle gold highlights. The lighting is cinematic and low-key, reflecting off polished glass surfaces. The mood is highly secure, authoritative, and wealthy, embodying an executive intelligence suite." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpE-iMi3_tOmqizj2kVK6JkzAn9-JPzasmM4kntDpLvegbzl3dY1wjThg3kAkgKNG2Gb7zRf1u0rnn157KcnpmJiuRX3VIEWIQVyuPwNjOARW2P-w-B0INbb_awVog0uM-G9z6-vwxBi-Ozw5g7XrrqwmG9RK8aI2vY_i5zxT6VtS2HttYzO7SeHiC5-mJn8S4aR5T9uzik1XHejfflnA8dWhpQTpNPntTYBZq5lTQ8_1FLjjdQM3lakojlZGbCmyx5PKJc_4czT4"/>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-secondary">Expropriation Authority</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Executive Suite</p>
+</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 space-y-2">
+<!-- Inactive -->
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">folder_managed</span>
+<span class="font-label-md text-label-md">Dossiers</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md">Topography</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md text-label-md">Legal</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="px-6 mb-6">
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-3 px-4 rounded border-t border-secondary-fixed/30 hover:bg-inverse-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                New Dossier
+            </button>
+</div>
+<!-- Footer Tabs (Settings is Active) -->
+<div class="space-y-1 mt-auto">
+<!-- Active Settings -->
+<a class="flex items-center gap-4 px-6 py-4 text-primary bg-primary-container/20 border-l-2 border-secondary scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-72 min-h-screen relative z-10">
+<!-- TopAppBar (Web) -->
+<header class="hidden md:flex justify-between items-center h-20 px-gutter bg-background/60 backdrop-blur-lg border-b-[0.5px] border-outline-variant/30 sticky top-0 z-50">
+<!-- Brand -->
+<div class="font-display-lg text-display-lg tracking-tight text-on-surface">Dossier Intelligence</div>
+<!-- Center Nav Links -->
+<nav class="flex gap-8">
+<a class="text-tertiary hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Directives</a>
+<a class="text-tertiary hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Compliance</a>
+<a class="text-tertiary hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Transfers</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-6">
+<!-- Search Placeholder (Right aligned per JSON) -->
+<div class="relative w-48">
+<input class="w-full bg-surface-container-high border-b border-outline-variant text-on-surface py-1 pl-8 text-label-sm focus:border-secondary focus:ring-0 focus:outline-none transition-colors rounded-none placeholder:text-on-surface-variant" placeholder="Search..." type="text"/>
+<span class="material-symbols-outlined absolute left-0 top-1 text-on-surface-variant" style="font-size: 18px;">search</span>
+</div>
+<div class="flex gap-4">
+<button class="text-tertiary hover:text-primary transition-colors glow-effect"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-tertiary hover:text-primary transition-colors glow-effect"><span class="material-symbols-outlined">history_edu</span></button>
+</div>
+<button class="bg-primary-container text-on-primary-container border-t border-secondary/30 px-4 py-2 rounded font-label-sm text-label-sm hover:bg-inverse-primary transition-colors">
+                    Execute Order
+                </button>
+</div>
+</header>
+<!-- Page Content Canvas -->
+<div class="flex-1 p-gutter md:p-container-padding max-w-[1440px] mx-auto w-full">
+<!-- Page Header -->
+<div class="mb-section-gap">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">Administrative Settings</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Manage authority profiles, security protocols, and support channels.</p>
+</div>
+<!-- Custom Tabs Navigation -->
+<div class="flex gap-8 border-b border-outline-variant/30 mb-8 overflow-x-auto hide-scrollbar">
+<button class="pb-4 font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors whitespace-nowrap">
+                    Authority Profiles
+                </button>
+<button class="pb-4 font-label-md text-label-md text-secondary active-tab-glow whitespace-nowrap">
+                    Security Protocols
+                </button>
+<button class="pb-4 font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors whitespace-nowrap">
+                    System Support
+                </button>
+</div>
+<!-- Bento Grid Content Area (Security Protocols Active) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Main Security Panel -->
+<section class="lg:col-span-8 glass-panel rounded-xl p-8 relative overflow-hidden group">
+<div class="absolute inset-0 z-0 opacity-10 transition-opacity duration-500 group-hover:opacity-20 pointer-events-none" data-alt="A dark, abstract digital visualization of a biometric fingerprint scanning process. Thin, elegant lines in glowing emerald green map over an obsidian surface. Subtle champagne gold data nodes pulse in the background. The aesthetic is high-tech, secure, and cinematic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCRU9RsPtIFpsTYIdhcjlTUlFgmrnRFeTga0ArGbjh8je5Rs-wM1U-hLxJrL4kg_MBvI70t-tOzvKo_k6hFuZ8LTFLeVgG-4_7TqhmM4W7BmClBS2aMxHSK9QFbuoa3wf8t71SxOZ9U3dsipHebaEmevwkBfDM_LEsxI5jkgVbRctzHSF22RfBpAKWQFUhCa3bmPQcP67VlWatpEZ2l-x1Mu5ojSh7yGyk2ClqZTvEBtE6VdBs4KUYx2VJjxccB5wmXOdQWq6IpR0s');"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary text-3xl">fingerprint</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Biometric Authentication</h3>
+</div>
+<div class="gold-gradient-line w-full mb-8"></div>
+<div class="space-y-6">
+<!-- Toggle Item 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container/50 rounded-lg border border-outline-variant/20 hover:bg-surface-container-high/50 transition-colors">
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">Require Biometrics for Dossier Execution</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Enforce fingerprint or retinal scan for Level 1 clearances.</p>
+</div>
+<!-- Custom Toggle -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container border border-outline-variant"></div>
+</label>
+</div>
+<!-- Toggle Item 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container/50 rounded-lg border border-outline-variant/20 hover:bg-surface-container-high/50 transition-colors">
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">Strict Encryption Mode (AES-256)</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Enable end-to-end encryption for all topographical data.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container border border-outline-variant"></div>
+</label>
+</div>
+<!-- Input Field -->
+<div class="pt-4">
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-2">Session Timeout Duration (Minutes)</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant text-on-surface py-2 focus:ring-0 focus:border-secondary focus:shadow-[0_0_8px_rgba(233,195,73,0.3)] transition-all font-body-md" type="number" value="15"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Sidebar Info / Contact -->
+<aside class="lg:col-span-4 space-y-gutter">
+<!-- Support Card -->
+<div class="glass-panel rounded-xl p-6 relative">
+<div class="flex items-start justify-between mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Executive Helpdesk</h3>
+<span class="flex h-3 w-3 mt-2">
+<span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Direct line to technical support for Level 1 clearances. Response time &lt; 5 minutes.</p>
+<div class="space-y-4">
+<button class="w-full bg-transparent border border-secondary text-secondary font-label-md text-label-md py-3 px-4 rounded hover:bg-secondary/10 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">support_agent</span>
+                                Initiate Secure Chat
+                            </button>
+<button class="w-full bg-transparent border border-outline-variant text-on-surface-variant font-label-md text-label-md py-3 px-4 rounded hover:border-outline hover:text-on-surface transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">call</span>
+                                Request Callback
+                            </button>
+</div>
+</div>
+<!-- System Status Card -->
+<div class="glass-panel rounded-xl p-6">
+<h3 class="font-label-md text-label-md text-on-surface mb-4 uppercase tracking-widest text-on-surface-variant">System Status</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Encryption Nodes</span>
+<span class="text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">check_circle</span> Operational</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Data Centers</span>
+<span class="text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">check_circle</span> Operational</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Topography Sync</span>
+<span class="text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">sync</span> Syncing...</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile Only - Simplified for brevity since layout handles it) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-high border-t border-outline-variant/30 flex justify-around p-4 z-50">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-[10px]">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">folder_managed</span>
+<span class="font-label-sm text-[10px]">Dossiers</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm text-[10px]">Settings</span>
+</a>
+</nav>
+<style>
+        /* Custom scrollbar hiding utility */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

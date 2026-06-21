@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>System Initialization</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Outfit:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration (Provided) -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#2a2a2a",
+                        "primary-container": "#006039",
+                        "tertiary": "#c8c6c5",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-bright": "#3a3939",
+                        "on-error": "#690005",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-fixed": "#002110",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#e5e2e1",
+                        "background": "#131313",
+                        "on-primary": "#003920",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-container-highest": "#353534",
+                        "surface-tint": "#88d7a6",
+                        "inverse-primary": "#176c43",
+                        "outline-variant": "#3f4942",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "outline": "#89938a",
+                        "on-surface-variant": "#bfc9bf",
+                        "secondary-fixed-dim": "#e9c349",
+                        "secondary": "#e9c349",
+                        "on-tertiary-container": "#c9c7c6",
+                        "on-tertiary": "#313030",
+                        "secondary-container": "#af8d11",
+                        "primary-fixed": "#a3f4c1",
+                        "primary-fixed-dim": "#88d7a6",
+                        "on-secondary": "#3c2f00",
+                        "secondary-fixed": "#ffe088",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-container": "#201f1f",
+                        "on-primary-fixed-variant": "#005230",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-lowest": "#0e0e0e",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#342800",
+                        "on-background": "#e5e2e1",
+                        "surface-dim": "#131313",
+                        "primary": "#88d7a6",
+                        "on-primary-container": "#88d8a7",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#545353",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#353534",
+                        "surface": "#131313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "12px",
+                        "section-gap": "64px",
+                        "stack-lg": "24px",
+                        "gutter": "24px",
+                        "stack-sm": "4px",
+                        "base": "8px",
+                        "container-padding": "40px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Outfit"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Animations & Effects */
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.6); /* Translucent Charcoal approximation */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(233, 195, 73, 0.2); /* secondary/20 */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 0 0.5px rgba(233, 195, 73, 0.1);
+        }
+
+        .ambient-glow-tl {
+            background: radial-gradient(circle, rgba(136, 215, 166, 0.08) 0%, transparent 70%); /* primary/8 */
+        }
+
+        .ambient-glow-br {
+            background: radial-gradient(circle, rgba(136, 215, 166, 0.05) 0%, transparent 70%); /* primary/5 */
+        }
+
+        .css-grid-bg {
+            background-size: 60px 60px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+        }
+
+        @keyframes progress-fill {
+            0% { transform: scaleX(0); opacity: 0.8; }
+            50% { transform: scaleX(0.7); opacity: 1; box-shadow: 0 0 15px rgba(233, 195, 73, 0.6); }
+            100% { transform: scaleX(1); opacity: 0.8; }
+        }
+
+        .animate-progress {
+            transform-origin: left;
+            animation: progress-fill 4s ease-in-out infinite alternate;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(233, 195, 73, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest min-h-screen w-full flex items-center justify-center overflow-hidden relative">
+<!-- Atmospheric Deep Background Elements -->
+<div class="absolute inset-0 css-grid-bg pointer-events-none z-0"></div>
+<!-- Emerald Corner Glows -->
+<div class="absolute -top-[307px] -left-[20vw] w-[80vw] h-[80vw] rounded-full ambient-glow-tl pointer-events-none z-0 mix-blend-screen"></div>
+<div class="absolute -bottom-[307px] -right-[20vw] w-[90vw] h-[90vw] rounded-full ambient-glow-br pointer-events-none z-0 mix-blend-screen"></div>
+<!-- Central Initialization Canvas -->
+<main class="relative z-10 w-full max-w-[720px] px-gutter mx-auto flex flex-col items-center">
+<!-- Sovereign Tier Glassmorphic Panel -->
+<div class="glass-panel w-full rounded-xl flex flex-col items-center py-[80px] px-container-padding relative overflow-hidden">
+<!-- Subtle internal top highlight -->
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-secondary/40 to-transparent"></div>
+<!-- Sophisticated Progress Indicator (Golden Rings) -->
+<div class="relative w-40 h-40 mb-section-gap flex items-center justify-center">
+<!-- Outer ambient blur -->
+<div class="absolute inset-0 bg-secondary/5 rounded-full blur-xl animate-pulse"></div>
+<!-- Slow outer orbital ring -->
+<div class="absolute inset-2 rounded-full border border-secondary/10 border-t-secondary/60 animate-[spin_4s_linear_infinite]"></div>
+<!-- Medium middle dashed ring -->
+<div class="absolute inset-6 rounded-full border-2 border-dashed border-secondary/30 border-l-secondary/80 animate-[spin_2.5s_linear_infinite_reverse]"></div>
+<!-- Inner precision solid ring -->
+<div class="absolute inset-10 rounded-full border-[1.5px] border-secondary/20 border-r-secondary animate-[spin_1s_linear_infinite]"></div>
+<!-- Central Icon Core -->
+<div class="relative z-10 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-md rounded-full w-12 h-12 border border-secondary/20 shadow-[0_0_15px_rgba(233,195,73,0.15)]">
+<span class="material-symbols-outlined font-label-md text-secondary" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+</div>
+<!-- Typography Content -->
+<div class="text-center flex flex-col items-center w-full">
+<!-- Dynamic dots animation injected via JS for smoothness -->
+<h1 class="font-headline-md text-headline-lg-mobile md:text-headline-lg text-secondary mb-stack-md tracking-tight glow-text flex items-center justify-center gap-1">
+<span>Initializing Secure Protocol</span>
+<span class="inline-block w-8 text-left" id="loading-dots"></span>
+</h1>
+<p class="font-label-md text-label-md text-secondary/60 tracking-[0.1em]">
+                    Authenticating Level V Clearance
+                </p>
+<!-- Thin linear progress bar representing system load -->
+<div class="w-full max-w-[320px] h-[1px] bg-secondary/10 mt-stack-lg relative overflow-hidden rounded-full">
+<div class="absolute top-0 left-0 h-full bg-secondary w-full animate-progress shadow-[0_0_8px_rgba(233,195,73,0.8)]"></div>
+</div>
+<!-- Faint numeric indicator -->
+<div class="mt-stack-sm font-label-sm text-label-sm text-secondary/40 font-mono tracking-widest">
+                    SYS.OP.99.2A
+                </div>
+</div>
+</div>
+</main>
+<!-- Lightweight Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dotsElement = document.getElementById('loading-dots');
+            let dotCount = 0;
+            
+            // Simple animated dots for the '...' effect without layout shift
+            setInterval(() => {
+                dotCount = (dotCount + 1) % 4;
+                dotsElement.textContent = '.'.repeat(dotCount);
+            }, 500);
+        });
+    </script>
+</body></html>

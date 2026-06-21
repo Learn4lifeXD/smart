@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dossier Intelligence - Dossier Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#a3f4c1",
+                        "inverse-on-surface": "#313030",
+                        "primary-fixed-dim": "#88d7a6",
+                        "surface": "#131313",
+                        "surface-container": "#201f1f",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-secondary": "#3c2f00",
+                        "on-primary-fixed-variant": "#005230",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-tint": "#88d7a6",
+                        "primary-container": "#006039",
+                        "on-primary-fixed": "#002110",
+                        "surface-container-highest": "#353534",
+                        "error": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-error": "#690005",
+                        "primary": "#88d7a6",
+                        "on-primary": "#003920",
+                        "on-tertiary": "#313030",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-container": "#545353",
+                        "secondary-container": "#af8d11",
+                        "inverse-primary": "#176c43",
+                        "secondary-fixed": "#ffe088",
+                        "secondary": "#e9c349",
+                        "outline": "#89938a",
+                        "tertiary": "#c8c6c5",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-primary-container": "#88d8a7",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "background": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-container": "#c9c7c6",
+                        "on-secondary-container": "#342800",
+                        "on-surface-variant": "#bfc9bf",
+                        "surface-dim": "#131313",
+                        "surface-variant": "#353534",
+                        "outline-variant": "#3f4942"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-padding": "40px",
+                        "base": "8px",
+                        "stack-md": "12px",
+                        "gutter": "24px",
+                        "stack-sm": "4px",
+                        "section-gap": "64px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0F0F0F; color: #e5e2e1; }
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .card-active {
+            border: 0.5px solid rgba(233, 195, 73, 0.3);
+            box-shadow: 0 0 15px rgba(233, 195, 73, 0.05);
+            transition: all 0.3s ease;
+        }
+        .card-active:hover {
+            border-color: rgba(233, 195, 73, 0.8);
+            box-shadow: 0 0 20px rgba(233, 195, 73, 0.15);
+            transform: translateY(-2px);
+        }
+        .led-active {
+            box-shadow: 0 0 8px #a3f4c1;
+        }
+        .led-pending {
+            box-shadow: 0 0 8px #e9c349;
+        }
+        .kanban-column::-webkit-scrollbar {
+            width: 4px;
+        }
+        .kanban-column::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .kanban-column::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        .card-gradient-line {
+            background: linear-gradient(90deg, rgba(233, 195, 73, 0.5) 0%, rgba(233, 195, 73, 0) 100%);
+            height: 1px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-hidden bg-surface-lowest">
+<!-- Ambient Background -->
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-surface-container-high/20 via-surface/0 to-surface/0"></div>
+<div class="absolute top-[20%] left-[10%] w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] opacity-30 mix-blend-screen"></div>
+<div class="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[100px] opacity-20 mix-blend-screen"></div>
+</div>
+<!-- SideNavBar -->
+<nav class="h-screen w-72 fixed left-0 top-0 border-r-[0.5px] border-secondary/30 bg-surface-container-lowest/90 z-50 shadow-[20px_0_40px_rgba(0,0,0,0.4)] flex flex-col py-container-padding bg-surface-container-low/80 backdrop-blur-xl hidden md:flex">
+<!-- Header -->
+<div class="px-6 mb-12 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-secondary/20 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a mature, distinguished senior official in a sharply tailored dark charcoal suit. The lighting is dramatic, high-end studio style, evoking a premium 'Succession' aesthetic. The mood is authoritative and discreet, set against a deep obsidian background with subtle Champagne Gold rim lighting. The image conveys wealth management and executive power." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9YHasl366hXQ0v61c7w_DPrtwJirrkAALrg7Y9df8ykDtK7Gwlxg8Jm0XM2Izdh6hgIGRyeXGskR9QMJlgOrOeujVGxTZjxQO7lpX0OP_HGuKUgj1FbYUcpPCawhf_seOHgyUB1cEjir9npzaI1wGZzlLokraCB5f9A4BQADuM3JTSwCiIiAnlpli3JQvPFXxelempjPjpbX09nHCGa9tSUM1PYdkhN0zilNvfu_lowR9YzGU4ptx26sbNumCYRHpQsLNxqmZfto"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-secondary">Expropriation Authority</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Executive Suite</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-6 mb-8">
+<button class="w-full bg-primary-container hover:bg-primary-container/90 text-on-primary border-t border-secondary/30 rounded-lg py-3 px-4 flex items-center justify-center gap-2 font-label-md text-label-md transition-all shadow-[0_4px_12px_rgba(0,0,0,0.2)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                New Dossier
+            </button>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-primary bg-primary-container/20 border-l-2 border-secondary scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="folder_managed" style="font-variation-settings: 'FILL' 1;">folder_managed</span>
+<span class="font-label-md text-label-md">Dossiers</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Topography</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span class="font-label-md text-label-md">Legal</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="mt-auto flex flex-col gap-2 border-t border-outline-variant/20 pt-4">
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-bright/50 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-0 md:ml-72 h-screen flex flex-col bg-transparent">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-20 px-gutter bg-background/60 backdrop-blur-lg border-b-[0.5px] border-outline-variant/30 docked full-width top-0 z-40">
+<div class="flex items-center gap-8">
+<h2 class="font-display-lg text-display-lg tracking-tight text-on-surface text-[24px]">Dossier Intelligence</h2>
+<div class="hidden lg:flex gap-6">
+<a class="font-label-sm text-label-sm text-tertiary hover:text-primary transition-colors" href="#">Directives</a>
+<a class="font-label-sm text-label-sm text-tertiary hover:text-primary transition-colors" href="#">Compliance</a>
+<a class="font-label-sm text-label-sm text-tertiary hover:text-primary transition-colors" href="#">Transfers</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search -->
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-tertiary text-sm">search</span>
+<input class="bg-surface-container-low border-b border-outline-variant/50 focus:border-secondary focus:ring-0 text-on-surface text-label-sm pl-9 pr-4 py-2 w-64 transition-all focus:shadow-[0_0_8px_rgba(233,195,73,0.2)] bg-transparent" placeholder="Search dossiers..." type="text"/>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="text-tertiary hover:text-secondary transition-colors glow-effect relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full led-pending"></span>
+</button>
+<button class="text-tertiary hover:text-secondary transition-colors glow-effect">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+</button>
+<button class="ml-4 bg-transparent border border-secondary/50 text-secondary hover:bg-secondary/10 px-4 py-2 rounded-lg font-label-sm text-label-sm transition-all flex items-center gap-2">
+                        Execute Order
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Board Toolbar -->
+<div class="px-gutter py-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-outline-variant/10">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Active Operations</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage and track property acquisition lifecycles.</p>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-3">
+<button class="glass-panel border border-outline-variant/30 px-4 py-2 rounded-full font-label-sm text-label-sm text-on-surface-variant flex items-center gap-2 hover:border-secondary/50 transition-colors">
+<span class="material-symbols-outlined text-[14px]">filter_list</span>
+                    Priority
+                    <span class="material-symbols-outlined text-[14px]">arrow_drop_down</span>
+</button>
+<button class="glass-panel border border-outline-variant/30 px-4 py-2 rounded-full font-label-sm text-label-sm text-on-surface-variant flex items-center gap-2 hover:border-secondary/50 transition-colors">
+<span class="material-symbols-outlined text-[14px]">attach_money</span>
+                    Value
+                    <span class="material-symbols-outlined text-[14px]">arrow_drop_down</span>
+</button>
+<button class="glass-panel border border-outline-variant/30 px-4 py-2 rounded-full font-label-sm text-label-sm text-on-surface-variant flex items-center gap-2 hover:border-secondary/50 transition-colors">
+<span class="w-2 h-2 rounded-full bg-primary led-active"></span>
+                    Status
+                    <span class="material-symbols-outlined text-[14px]">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<!-- Kanban Board Container -->
+<div class="flex-1 overflow-x-auto overflow-y-hidden p-gutter flex gap-6 pb-8">
+<!-- Column 1: Initiation -->
+<div class="min-w-[320px] w-[320px] flex flex-col h-full bg-surface-container-lowest/30 rounded-xl border border-outline-variant/10 backdrop-blur-sm">
+<div class="p-4 border-b border-outline-variant/20 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<h4 class="font-label-md text-label-md text-on-surface tracking-wider uppercase">Initiation</h4>
+<span class="text-tertiary text-xs bg-surface-container px-2 py-0.5 rounded-full ml-2">2</span>
+</div>
+<button class="text-tertiary hover:text-secondary"><span class="material-symbols-outlined text-[18px]">more_horiz</span></button>
+</div>
+<div class="p-3 flex-1 overflow-y-auto kanban-column flex flex-col gap-3">
+<!-- Card -->
+<div class="glass-panel card-active rounded-lg p-4 cursor-pointer group">
+<div class="card-gradient-line mb-3 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono text-secondary">DOS-4092</span>
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+</div>
+<h5 class="font-headline-md text-[16px] text-on-surface mb-1">Estate Vanguard, Sector 4</h5>
+<p class="font-body-md text-[13px] text-on-surface-variant line-clamp-2 mb-4">Initial surveyor report submitted. Awaiting zoning confirmation from municipal database.</p>
+<div class="flex justify-between items-end border-t border-outline-variant/20 pt-3">
+<div>
+<span class="block text-[10px] text-tertiary uppercase tracking-wider">Est. Value</span>
+<span class="font-label-md text-on-surface">$4.2M</span>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-container flex items-center justify-center text-[10px] text-tertiary">JD</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2: Appraisal -->
+<div class="min-w-[320px] w-[320px] flex flex-col h-full bg-surface-container-lowest/30 rounded-xl border border-outline-variant/10 backdrop-blur-sm">
+<div class="p-4 border-b border-outline-variant/20 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary led-pending"></div>
+<h4 class="font-label-md text-label-md text-on-surface tracking-wider uppercase">Appraisal</h4>
+<span class="text-tertiary text-xs bg-surface-container px-2 py-0.5 rounded-full ml-2">1</span>
+</div>
+<button class="text-tertiary hover:text-secondary"><span class="material-symbols-outlined text-[18px]">more_horiz</span></button>
+</div>
+<div class="p-3 flex-1 overflow-y-auto kanban-column flex flex-col gap-3">
+<!-- Card -->
+<div class="glass-panel card-active rounded-lg p-4 cursor-pointer group">
+<div class="card-gradient-line mb-3 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono text-secondary">DOS-4088</span>
+<div class="w-2 h-2 rounded-full bg-secondary led-pending"></div>
+</div>
+<h5 class="font-headline-md text-[16px] text-on-surface mb-1">Industrial Tract B-9</h5>
+<p class="font-body-md text-[13px] text-on-surface-variant line-clamp-2 mb-4">Independent valuation ongoing. Discrepancy noted in soil remediation estimates.</p>
+<div class="flex justify-between items-end border-t border-outline-variant/20 pt-3">
+<div>
+<span class="block text-[10px] text-tertiary uppercase tracking-wider">Est. Value</span>
+<span class="font-label-md text-on-surface">$12.8M</span>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-container flex items-center justify-center text-[10px] text-tertiary">MK</div>
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-container flex items-center justify-center text-[10px] text-tertiary">AL</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 3: Legal Review -->
+<div class="min-w-[320px] w-[320px] flex flex-col h-full bg-surface-container-lowest/30 rounded-xl border border-outline-variant/10 backdrop-blur-sm">
+<div class="p-4 border-b border-outline-variant/20 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<h4 class="font-label-md text-label-md text-on-surface tracking-wider uppercase">Legal Review</h4>
+<span class="text-tertiary text-xs bg-surface-container px-2 py-0.5 rounded-full ml-2">1</span>
+</div>
+<button class="text-tertiary hover:text-secondary"><span class="material-symbols-outlined text-[18px]">more_horiz</span></button>
+</div>
+<div class="p-3 flex-1 overflow-y-auto kanban-column flex flex-col gap-3">
+<!-- Card -->
+<div class="glass-panel card-active rounded-lg p-4 cursor-pointer group border-error/30 hover:border-error/80">
+<div class="h-[1px] w-full bg-gradient-to-r from-error/50 to-transparent mb-3 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono text-error">DOS-3991</span>
+<div class="w-2 h-2 rounded-full bg-error shadow-[0_0_8px_#ffb4ab]"></div>
+</div>
+<h5 class="font-headline-md text-[16px] text-on-surface mb-1">Heritage Block 7</h5>
+<p class="font-body-md text-[13px] text-error/80 line-clamp-2 mb-4">Contested eminent domain claim. Injunction filed by historical preservation society.</p>
+<div class="flex justify-between items-end border-t border-outline-variant/20 pt-3">
+<div>
+<span class="block text-[10px] text-tertiary uppercase tracking-wider">Est. Value</span>
+<span class="font-label-md text-on-surface">$8.5M</span>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-container flex items-center justify-center text-[10px] text-tertiary">LC</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 4: Negotiation -->
+<div class="min-w-[320px] w-[320px] flex flex-col h-full bg-surface-container-lowest/30 rounded-xl border border-outline-variant/10 backdrop-blur-sm">
+<div class="p-4 border-b border-outline-variant/20 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary led-active"></div>
+<h4 class="font-label-md text-label-md text-on-surface tracking-wider uppercase">Negotiation</h4>
+<span class="text-tertiary text-xs bg-surface-container px-2 py-0.5 rounded-full ml-2">2</span>
+</div>
+<button class="text-tertiary hover:text-secondary"><span class="material-symbols-outlined text-[18px]">more_horiz</span></button>
+</div>
+<div class="p-3 flex-1 overflow-y-auto kanban-column flex flex-col gap-3">
+<!-- Card -->
+<div class="glass-panel card-active rounded-lg p-4 cursor-pointer group">
+<div class="card-gradient-line mb-3 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono text-secondary">DOS-3850</span>
+<div class="w-2 h-2 rounded-full bg-primary led-active"></div>
+</div>
+<h5 class="font-headline-md text-[16px] text-on-surface mb-1">Commercial Plaza Omega</h5>
+<p class="font-body-md text-[13px] text-on-surface-variant line-clamp-2 mb-4">Finalizing compensation package with majority stakeholders. Draft agreement circulated.</p>
+<div class="flex justify-between items-end border-t border-outline-variant/20 pt-3">
+<div>
+<span class="block text-[10px] text-tertiary uppercase tracking-wider">Est. Value</span>
+<span class="font-label-md text-on-surface">$24.1M</span>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-container flex items-center justify-center text-[10px] text-tertiary">RT</div>
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-container flex items-center justify-center text-[10px] text-tertiary">SW</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
