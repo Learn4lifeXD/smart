@@ -10,7 +10,9 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [agentStatus, setAgentStatus] = useState<string | null>(null);
+  const [attachedFile, setAttachedFile] = useState<{ name: string; content: string } | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const lastProcessedId = useRef<string | null>(null);
 
   const scrollToBottom = () => {
@@ -86,12 +88,34 @@ export default function ChatPage() {
     }
   };
 
-  const handleSend = () => {
-    if (!input.trim() || isLoading) return;
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setAttachedFile({
+        name: file.name,
+        content: event.target?.result as string,
+      });
+    };
+    reader.readAsText(file);
+    // Reset input so the same file can be selected again if needed
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
-    const userMessage: Message = { id: Date.now().toString(), sender: "user", text: input };
-    setMessages((prev) => [...prev, userMessage]);
+  const handleSend = async () => {
+    if ((!input.trim() && !attachedFile) || isLoading) return;
+
+    const userText = input;
+    const fileContext = attachedFile ? `[Attached File: ${attachedFile.name}]\n\n${attachedFile.content}\n\n` : "";
+    const fullQuery = fileContext + userText;
+
+    const userMsg: Message = { id: Date.now().toString(), sender: "user", text: userText || `Attached file: ${attachedFile?.name}` };
+    setMessages((prev) => [...prev, userMsg]);
     setInput("");
+    setAttachedFile(null);
+
+    await generateAIResponse(fullQuery);
   };
 
   const exportToPDF = (text: string, id: string) => {
@@ -188,24 +212,42 @@ export default function ChatPage() {
         </div>
 
         {/* Input Bar */}
-        <div className="p-6 border-t border-outline-variant/10 bg-surface-container-lowest/80 backdrop-blur-md rounded-b-xl">
-          <div className="flex gap-4 items-end">
-            <div className="flex-1 glass-panel border border-outline-variant/30 rounded-xl flex items-center p-2 focus-within:border-primary/50 transition-colors shadow-inner">
-              <button className="p-3 text-on-surface-variant hover:text-primary transition-colors">
-                <span className="material-symbols-outlined text-[20px]">attach_file</span>
+        <div className="p-4 sm:p-6 bg-surface border-t border-outline-variant/20 z-10">
+          {attachedFile && (
+            <div className="mb-3 inline-flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary px-3 py-1.5 rounded-full text-sm animate-in fade-in slide-in-from-bottom-2">
+              <span className="material-symbols-outlined text-[16px]">description</span>
+              <span className="max-w-[200px] truncate font-medium">{attachedFile.name}</span>
+              <button onClick={() => setAttachedFile(null)} className="hover:text-error transition-colors ml-1 flex items-center bg-transparent border-none cursor-pointer">
+                <span className="material-symbols-outlined text-[16px]">close</span>
               </button>
-              <textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Enter directive or query dossier..."
-                className="flex-1 bg-transparent border-none outline-none text-on-surface placeholder:text-on-surface-variant/50 resize-none h-[44px] py-3 text-sm font-body-md"
-                rows={1}
-              />
             </div>
+          )}
+          <div className="relative flex gap-4 items-center">
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              className="hidden"
+              accept=".txt,.md,.csv,.json"
+            />
+            <button 
+              onClick={() => fileInputRef.current?.click()}
+              className="absolute left-4 text-on-surface-variant hover:text-primary transition-colors flex items-center bg-transparent border-none cursor-pointer"
+            >
+              <span className="material-symbols-outlined">attach_file</span>
+            </button>
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Enter directive, query dossier, or attach file..."
+              className="flex-1 bg-surface-container border border-outline-variant/30 text-on-surface p-4 pl-12 pr-4 rounded-xl focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all text-[15px] resize-none"
+              rows={1}
+              disabled={isLoading}
+            />
             <button
               onClick={handleSend}
-              disabled={!input.trim() || isLoading}
+              disabled={(!input.trim() && !attachedFile) || isLoading}
               className="w-[60px] h-[60px] shrink-0 rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary border border-primary/30 flex items-center justify-center shadow-[0_0_15px_rgba(136,215,166,0.2)] hover:shadow-[0_0_20px_rgba(136,215,166,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="material-symbols-outlined text-[24px]">send</span>
