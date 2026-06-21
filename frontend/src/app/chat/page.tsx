@@ -9,6 +9,7 @@ export default function ChatPage() {
   const { messages, setMessages } = useGlobalState();
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [agentStatus, setAgentStatus] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const lastProcessedId = useRef<string | null>(null);
 
@@ -30,8 +31,9 @@ export default function ChatPage() {
 
   const generateAIResponse = async (text: string) => {
     setIsLoading(true);
+    setAgentStatus("Orchestrator is routing request...");
     try {
-      const response = await fetch("/api/v1/ai/summarize", {
+      const response = await fetch("/api/v1/ai/orchestrator", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ document_text: text }),
@@ -42,11 +44,37 @@ export default function ChatPage() {
         throw new Error(errorData.error || `Server error: ${response.status} ${response.statusText}`);
       }
 
-      const data = await response.json();
+      if (!response.body) throw new Error("No response stream");
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      
+      let finalData = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        const chunk = decoder.decode(value);
+        const lines = chunk.split("\n\n");
+        for (const line of lines) {
+          if (line.trim().startsWith("data: ")) {
+            const data = JSON.parse(line.replace("data: ", ""));
+            if (data.status === "error") {
+              throw new Error(data.data);
+            } else if (data.status === "complete") {
+              finalData = data.data;
+              break;
+            } else {
+              setAgentStatus(data.status);
+            }
+          }
+        }
+      }
+
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         sender: "ai",
-        text: data.summary || "No response received.",
+        text: finalData || "No response received.",
       };
       
       setMessages((prev) => [...prev, aiMessage]);
@@ -54,6 +82,7 @@ export default function ChatPage() {
       setMessages((prev) => [...prev, { id: Date.now().toString(), sender: "ai", text: `*Error:* ${err.message}` }]);
     } finally {
       setIsLoading(false);
+      setAgentStatus(null);
     }
   };
 
@@ -141,10 +170,17 @@ export default function ChatPage() {
               <div className="w-10 h-10 shrink-0 rounded-lg flex items-center justify-center border shadow-lg bg-surface-container border-primary/30">
                 <span className="material-symbols-outlined text-[20px] text-primary animate-pulse">smart_toy</span>
               </div>
-              <div className="glass-panel p-5 rounded-xl border border-primary/20 rounded-tl-none shadow-xl flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-primary animate-bounce"></div>
-                <div className="w-2 h-2 rounded-full bg-primary animate-bounce delay-75"></div>
-                <div className="w-2 h-2 rounded-full bg-primary animate-bounce delay-150"></div>
+              <div className="glass-panel p-5 rounded-xl border border-primary/20 rounded-tl-none shadow-xl flex items-center gap-4">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-primary animate-bounce"></div>
+                  <div className="w-2 h-2 rounded-full bg-primary animate-bounce delay-75"></div>
+                  <div className="w-2 h-2 rounded-full bg-primary animate-bounce delay-150"></div>
+                </div>
+                {agentStatus && (
+                  <div className="border-l border-primary/20 pl-4 py-1">
+                    <span className="text-[13px] font-mono text-primary animate-pulse">{agentStatus}</span>
+                  </div>
+                )}
               </div>
             </div>
           )}
